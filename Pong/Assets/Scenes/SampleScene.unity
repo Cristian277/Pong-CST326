@@ -1510,6 +1510,8 @@ MonoBehaviour:
   speed: 6
   rb: {fileID: 1644984364}
   startPosition: {x: 0, y: 0, z: 0}
+  player1Bool: 0
+  player2Bool: 0
 --- !u!54 &1644984364
 Rigidbody:
   m_ObjectHideFlags: 0

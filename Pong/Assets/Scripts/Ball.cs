@@ -7,18 +7,33 @@ public class Ball : MonoBehaviour
     public float speed = 5f;
     public Rigidbody rb;
     public Vector3 startPosition;
+    public bool player1Bool = false;
+    public bool player2Bool = false;
+    private Vector3 leftPosition = new Vector3(-5, 0, 0);
+    private Vector3 rightPosition = new Vector3(5, 0, 0);
 
-    // Start is called before the first frame update
+
+    // Saves starting position (0,0,0)
     void Start()
     {
         startPosition = transform.position;
         Launch();
     }
 
+    //Reset is called in the manager
     public void Reset()
     {
         rb.velocity = Vector3.zero;
-        transform.position = startPosition;
+        //if player 1 scored then bool should be true so set the coordinates to the opposite side
+        if (player1Bool)
+        {
+            transform.position = rightPosition;
+        }
+        else
+        {
+            transform.position = leftPosition;
+        }
+        
         Launch();
     }
 
@@ -28,11 +43,29 @@ public class Ball : MonoBehaviour
         
     }
 
+    //Throws the ball in a random direction
     private void Launch()
     {
-        float x = Random.Range(0, 2) == 0 ? -1 : 1;
-        float y = Random.Range(0, 2) == 0 ? -1 : 1;
 
+        float x;
+        float y;
+
+        if(transform.position == rightPosition)
+        {
+            x = Random.Range(0, 1) == 0 ? -1 : -1; //change 1 to positive or negative depending on the bool
+            y = Random.Range(0, 1) == 0 ? -1 : 1;
+        }
+        else if(transform.position == leftPosition)
+        {
+            x = Random.Range(0, 1) == 0 ? 1 : 1; //change 1 to positive or negative depending on the bool
+            y = Random.Range(0, 1) == 0 ? -1 : 1;
+        }
+        else
+        {
+            x = Random.Range(0, 1) == 0 ? -1 : 1; //change 1 to positive or negative depending on the bool
+            y = Random.Range(0, 1) == 0 ? -1 : 1;
+        }
+        
         rb.velocity = new Vector3(speed * x, speed * y,0f);
     }
 

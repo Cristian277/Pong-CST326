@@ -28,9 +28,11 @@ public class Manager : MonoBehaviour
     {
             Player1Score++;
             Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
+            ball.gameObject.GetComponent<Ball>().player1Bool = true;
             ResetPosition();
+            ball.gameObject.GetComponent<Ball>().player1Bool = false;
 
-            if (Player1Score == 5)
+        if (Player1Score == 5)
             {
                 //Time.timeScale = 0;
                 GameOver();
@@ -41,7 +43,9 @@ public class Manager : MonoBehaviour
     {
             Player2Score++;
             Player2Text.GetComponent<TextMeshProUGUI>().text = Player2Score.ToString();
+            ball.gameObject.GetComponent<Ball>().player2Bool = true;
             ResetPosition();
+            ball.gameObject.GetComponent<Ball>().player2Bool = false;
 
             if (Player2Score == 5)
             {
