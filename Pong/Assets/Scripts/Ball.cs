@@ -33,6 +33,7 @@ public class Ball : MonoBehaviour
         {
             transform.position = leftPosition;
         }
+        speed = 5f;
         
         Launch();
     }
@@ -67,6 +68,16 @@ public class Ball : MonoBehaviour
         }
         
         rb.velocity = new Vector3(speed * x, speed * y,0f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.name == "Paddle1"||collision.collider.name == "Paddle2")
+        {
+            speed += 4;
+            Vector3 direction = rb.velocity.normalized;
+            rb.velocity = direction * speed;
+        }
     }
 
 }

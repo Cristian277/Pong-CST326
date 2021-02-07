@@ -65,7 +65,7 @@ public class Manager : MonoBehaviour
     {
         if (Player1Score > Player2Score)
         {
-            Debug.Log("GAME OVER Player 1 Wins! Final Score: " + Player1Score + " to " + Player2Score);
+            Debug.Log("GAME OVER Player 1 Wins! Final Score: " + Player1Score + " - " + Player2Score);
             Player1Score = 0;
             Player2Score = 0;
             Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
@@ -73,7 +73,7 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            Debug.Log("GAME OVER Player 2 Wins! Final Score: " + Player1Score + " to " + Player2Score);
+            Debug.Log("GAME OVER Player 2 Wins! Final Score: " + Player1Score + " - " + Player2Score);
             Player1Score = 0;
             Player2Score = 0;
             Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
