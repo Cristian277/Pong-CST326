@@ -12,12 +12,12 @@ public class Goal : MonoBehaviour
         {
             if (isPlayer1Goal)
             {
-                Debug.Log("Player 2 Scored");
+                Debug.Log("Player 2 Scored!" + "\n" + "Current Score: " + GameObject.Find("Manager").GetComponent<Manager>().Player1Score + " to " + GameObject.Find("Manager").GetComponent<Manager>().Player2Score);
                 GameObject.Find("Manager").GetComponent<Manager>().Player2Scored();
             }
             else
             {
-                Debug.Log("Player 1 Scored");
+                Debug.Log("Player 1 Scored!" + "\n" + "Current Score: " + GameObject.Find("Manager").GetComponent<Manager>().Player2Score + " to " + GameObject.Find("Manager").GetComponent<Manager>().Player1Score);
                 GameObject.Find("Manager").GetComponent<Manager>().Player1Scored();
             }
 

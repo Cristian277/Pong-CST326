@@ -19,22 +19,35 @@ public class Manager : MonoBehaviour
     [Header("Score UI")]
     public GameObject Player1Text;
     public GameObject Player2Text;
+    public GameObject GameOverText;
 
-    private int Player1Score;
-    private int Player2Score;
+    public int Player1Score;
+    public int Player2Score;
 
     public void Player1Scored()
     {
-        Player1Score++;
-        Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
-        ResetPosition();
+            Player1Score++;
+            Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
+            ResetPosition();
+
+            if (Player1Score == 5)
+            {
+                //Time.timeScale = 0;
+                GameOver();
+            }
     }
 
     public void Player2Scored()
     {
-        Player2Score++;
-        Player2Text.GetComponent<TextMeshProUGUI>().text = Player2Score.ToString();
-        ResetPosition();
+            Player2Score++;
+            Player2Text.GetComponent<TextMeshProUGUI>().text = Player2Score.ToString();
+            ResetPosition();
+
+            if (Player2Score == 5)
+            {
+                //Time.timeScale = 0;
+                GameOver();
+            }
     }
 
     private void ResetPosition()
@@ -42,5 +55,26 @@ public class Manager : MonoBehaviour
         ball.GetComponent<Ball>().Reset();
         player1Paddle.GetComponent<Paddle>().Reset();
         player2Paddle.GetComponent<Paddle>().Reset();
+    }
+
+    private void GameOver()
+    {
+        if (Player1Score > Player2Score)
+        {
+            Debug.Log("GAME OVER Player 1 Wins! Final Score: " + Player1Score + " to " + Player2Score);
+            Player1Score = 0;
+            Player2Score = 0;
+            Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
+            Player2Text.GetComponent<TextMeshProUGUI>().text = Player2Score.ToString();
+        }
+        else
+        {
+            Debug.Log("GAME OVER Player 2 Wins! Final Score: " + Player1Score + " to " + Player2Score);
+            Player1Score = 0;
+            Player2Score = 0;
+            Player1Text.GetComponent<TextMeshProUGUI>().text = Player1Score.ToString();
+            Player2Text.GetComponent<TextMeshProUGUI>().text = Player2Score.ToString();
+        }
+        
     }
 }
