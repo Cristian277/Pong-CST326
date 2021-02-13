@@ -47,7 +47,6 @@ public class Ball : MonoBehaviour
     //Throws the ball in a random direction
     private void Launch()
     {
-
         float x;
         float y;
 
