@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Ball : MonoBehaviour
 {
     public float speed = 5f;
@@ -12,6 +14,16 @@ public class Ball : MonoBehaviour
     private Vector3 leftPosition = new Vector3(-5, 0, 0);
     private Vector3 rightPosition = new Vector3(5, 0, 0);
 
+    public AudioSource audioSource;
+
+    public AudioClip paddleHitLeft;
+    public AudioClip paddleHitRight;
+    public AudioClip scoreClip;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Saves starting position (0,0,0)
     void Start()
@@ -34,14 +46,14 @@ public class Ball : MonoBehaviour
             transform.position = leftPosition;
         }
         speed = 5f;
-        
+
         Launch();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //Throws the ball in a random direction
@@ -50,12 +62,12 @@ public class Ball : MonoBehaviour
         float x;
         float y;
 
-        if(transform.position == rightPosition)
+        if (transform.position == rightPosition)
         {
             x = Random.Range(0, 1) == 0 ? -1 : -1; //change 1 to positive or negative depending on the bool
             y = Random.Range(0, 1) == 0 ? -1 : 1;
         }
-        else if(transform.position == leftPosition)
+        else if (transform.position == leftPosition)
         {
             x = Random.Range(0, 1) == 0 ? 1 : 1; //change 1 to positive or negative depending on the bool
             y = Random.Range(0, 1) == 0 ? -1 : 1;
@@ -65,18 +77,31 @@ public class Ball : MonoBehaviour
             x = Random.Range(0, 1) == 0 ? -1 : 1; //change 1 to positive or negative depending on the bool
             y = Random.Range(0, 1) == 0 ? -1 : 1;
         }
-        
-        rb.velocity = new Vector3(speed * x, speed * y,0f);
+
+        rb.velocity = new Vector3(speed * x, speed * y, 0f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.name == "Paddle1"||collision.collider.name == "Paddle2")
+        //where the sound will be called 
+        if (collision.collider.name == "Paddle1")
         {
+            audioSource.PlayOneShot(paddleHitLeft);
+            speed += 4;
+            Vector3 direction = rb.velocity.normalized;
+            rb.velocity = direction * speed;
+        }else if(collision.collider.name == "Paddle2")
+        {
+            audioSource.PlayOneShot(paddleHitRight);
             speed += 4;
             Vector3 direction = rb.velocity.normalized;
             rb.velocity = direction * speed;
         }
+    }
+
+    public void scoreSound()
+    {
+        audioSource.PlayOneShot(scoreClip);
     }
 
 }

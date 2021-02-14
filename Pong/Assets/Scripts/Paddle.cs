@@ -8,13 +8,13 @@ public class Paddle : MonoBehaviour
     public float speed = 5f;
     public Vector3 startPosition;
     public Vector3 startScale;
+
     // Start is called before the first frame update
 
     void Start()
     {
         startPosition = gameObject.transform.position;
         startScale = gameObject.transform.localScale;
-
     }
 
     // Update is called once per frame

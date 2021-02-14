@@ -27,6 +27,7 @@ public class Manager : MonoBehaviour
     public void Player1Scored()
     {
             Player1Score++;
+            ball.gameObject.GetComponent<Ball>().scoreSound();
             Player1Text.GetComponent<TextMeshProUGUI>().text = "P1 Score: " + Player1Score.ToString();
             ball.gameObject.GetComponent<Ball>().player1Bool = true;
             ResetPosition();
@@ -75,6 +76,7 @@ public class Manager : MonoBehaviour
     public void Player2Scored()
     {
             Player2Score++;
+            ball.gameObject.GetComponent<Ball>().scoreSound();
             Player2Text.GetComponent<TextMeshProUGUI>().text = "P2 Score: " + Player2Score.ToString();
             ball.gameObject.GetComponent<Ball>().player2Bool = true;
             ResetPosition();
