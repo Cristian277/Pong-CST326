@@ -32,7 +32,7 @@ public class Paddle : MonoBehaviour
 
     public void sizeIncrease()
     {
-        this.transform.localScale += new Vector3(0, 0.5f, 0);
+        this.transform.localScale += new Vector3(0, 0.7f, 0);
     }
 
     public void sizeDecrease()

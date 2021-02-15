@@ -33,25 +33,18 @@ public class Manager : MonoBehaviour
             ResetPosition();
             ball.gameObject.GetComponent<Ball>().player1Bool = false;
 
-            if (Player1Score == 4)
+            if (Player1Score == 2)
             {
                 player1Paddle.GetComponent<Paddle>().sizeIncrease();
-            }
-
-            if (Player1Score >= 4 && Player1Score < 6)
-            {
+                Debug.Log("P1 Paddle size increased");
                 Player1Text.GetComponent<TextMeshProUGUI>().color = Color.cyan;
-
             }
-            else if (Player1Score >= 6 && Player1Score < 9)
+
+            if (Player1Score == 3)
             {
                 Player1Text.GetComponent<TextMeshProUGUI>().color = Color.yellow;
             }
-            else if (Player1Score >= 9 && Player1Score < 11)
-            {
-                Player1Text.GetComponent<TextMeshProUGUI>().color = Color.green;
-            }
-            else if (Player1Score == 11)
+            else if (Player1Score == 4)
             {
                 Player1Text.GetComponent<TextMeshProUGUI>().color = Color.red;
             }
@@ -63,14 +56,13 @@ public class Manager : MonoBehaviour
             else if (Player1Score == 4 && Player2Score == 4)
             {
                 SuddenDeathText.GetComponent<TextMeshProUGUI>().text = "SUDDEN DEATH";
-                //SuddenDeathText.GetComponent<TextMeshProUGUI>().color = Color.red;
                 SpeedUpGame();
             }
     }
 
     public void SpeedUpGame()
     {
-        Time.timeScale += 1.0f;
+        Time.timeScale += 0.8f;
     }
 
     public void Player2Scored()
@@ -82,40 +74,32 @@ public class Manager : MonoBehaviour
             ResetPosition();
             ball.gameObject.GetComponent<Ball>().player2Bool = false;
 
-            if (Player2Score == 4)
+            if (Player2Score == 2)
             {
                 player2Paddle.GetComponent<Paddle>().sizeIncrease();
-            }
-
-            if (Player2Score >= 4 && Player2Score < 6)
-            {
+                Debug.Log("P2 Paddle size increased");
                 Player2Text.GetComponent<TextMeshProUGUI>().color = Color.cyan;
             }
-            else if (Player2Score >= 6 && Player2Score < 9)
+
+            if (Player2Score == 3)
             {
                 Player2Text.GetComponent<TextMeshProUGUI>().color = Color.yellow;
             }
-            else if (Player2Score >= 9 && Player2Score < 11)
-            {
-                Player2Text.GetComponent<TextMeshProUGUI>().color = Color.green;
-            }
-            else if (Player2Score == 11)
+            else if (Player2Score == 4)
             {
                 Player2Text.GetComponent<TextMeshProUGUI>().color = Color.red;
             }
 
-
             if (Player2Score == 5)
             {
                 GameOver();
-
-            }else if (Player1Score == 4 && Player2Score == 4)
+            }
+            else if (Player1Score == 4 && Player2Score == 4)
             {
                 SuddenDeathText.GetComponent<TextMeshProUGUI>().text = "SUDDEN DEATH";
-                //SuddenDeathText.GetComponent<TextMeshProUGUI>().color = Color.red;
                 SpeedUpGame();
             }
-    }
+     }
 
     private void ResetPosition()
     {
@@ -136,7 +120,9 @@ public class Manager : MonoBehaviour
             Player1Text.GetComponent<TextMeshProUGUI>().color = Color.white;
             Player2Text.GetComponent<TextMeshProUGUI>().color = Color.white;
             SuddenDeathText.GetComponent<TextMeshProUGUI>().text = "";
-            Time.timeScale = 1f;
+            PauseGame();
+            ball.GetComponent<Ball>().gameOver = true;
+            ResetPosition();
         }
         else
         {
@@ -148,8 +134,30 @@ public class Manager : MonoBehaviour
             Player1Text.GetComponent<TextMeshProUGUI>().color = Color.white;
             Player2Text.GetComponent<TextMeshProUGUI>().color = Color.white;
             SuddenDeathText.GetComponent<TextMeshProUGUI>().text = "";
-            Time.timeScale = 1f;
+            PauseGame();
+            ball.GetComponent<Ball>().gameOver = true;
+            ResetPosition();
         }
 
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ResumeGame();
+        }
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    void ResumeGame()
+    {
+        ball.GetComponent<Ball>().gameOver = false;
+        Time.timeScale = 1f;
+        
     }
 }

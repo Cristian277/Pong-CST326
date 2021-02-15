@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     public Vector3 startPosition;
     public bool player1Bool = false;
     public bool player2Bool = false;
+    public bool gameOver = false;
     private Vector3 leftPosition = new Vector3(-5, 0, 0);
     private Vector3 rightPosition = new Vector3(5, 0, 0);
 
@@ -35,6 +36,13 @@ public class Ball : MonoBehaviour
     //Reset is called in the manager
     public void Reset()
     {
+        if (gameOver)
+        {
+            player1Bool = false;
+            player2Bool = false;
+            transform.position = startPosition;
+        }
+
         rb.velocity = Vector3.zero;
         //if player 1 scored then bool should be true so set the coordinates to the opposite side
         if (player1Bool)
@@ -102,6 +110,11 @@ public class Ball : MonoBehaviour
     public void scoreSound()
     {
         audioSource.PlayOneShot(scoreClip);
+    }
+
+    public void speedPowerUp()
+    {
+
     }
 
 }
